@@ -3,4 +3,6 @@ from resident import views
 
 urlpatterns = [
     url(r'^$', views.index,name='index'),
+    url(r'^user_logout/', views.user_logout, name='user_logout'),
+    url(r'^mydailyrepord/', views.mydailyrepord, name='mydailyrepord'),
 ]

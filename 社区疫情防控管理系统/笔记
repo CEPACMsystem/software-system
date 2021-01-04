@@ -73,3 +73,5 @@ stus = models.Student.objects.all().values('name').annotate(score_sum = Sum('sco
 #联表查询
 stus = models.Student.objects.all().values('cls').annotate(score_sum = Sum('score')).values('cls__name')   #聚合求和
 
+#多对多
+
