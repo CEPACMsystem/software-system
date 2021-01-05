@@ -1,9 +1,19 @@
 <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="{{ aaa }}"><a href="">个人信息<span class="sr-only">(current)</span></a></li>
-              <li><a href="">每日上报</a></li>
-            <li><a href="">社区通行</a></li>
+          <ul class="nav nav-sidebar menu">
+            <li class="{{ aaa }}"><a href="{% url 'personalinfo' %}">个人信息<span class="sr-only">(current)</span></a></li>
+              <li class="{{ ccc }}"><a href="{% url 'mydailyrepord' %}">每日上报</a></li>
             <li><a href="">社区公告</a></li>
+              <li>
+                  <h5>社区通行</h5>
+                  <ul class="ilist">
+					<li><a href="#">出社区申请</a>
+					<i class="triangle"></i>
+					</li>
+					<li><a href="#">进社区申请</a></li>
+					<li><a href="#">车辆通行</a></li>
+					<li><a href="#">申诉</a></li>
+				</ul>
+              </li>
               <li><a href="">社区一家亲</a></li>
               <li><a href="">我的二维码</a></li>
             <li class="{{ ggg }}"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">安全退出</a></li>

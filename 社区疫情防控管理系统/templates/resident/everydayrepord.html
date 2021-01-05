@@ -1,0 +1,78 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+  <form class="form-horizontal" action="" method="post">
+    <div class="form-group">
+        <label class="control-label col-sm-2">填报日期：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="datetime" name="daydate" value="{{ time |date:'Y-m-d' }}">
+        </div>
+    </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">姓名：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="rename" placeholder="" value="{{ report.Name }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">单元号：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="unitnum">
+                <option value="{{ report.UnitNumber }}">{{ report.UnitNumber }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">楼号：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="floornum">
+                <option value="{{ report.FloorNumber }}">{{ report.FloorNumber }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">房号：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="housenum">
+                <option value="{{ report.HouseNumber }}">{{ report.HouseNumber }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">体温：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="temperatures" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">是否处于隔离期：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="isolate" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">是否咳嗽：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="cough" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">其他：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="others" placeholder="">
+        </div>
+      </div>
+{#      <div class="form-group">#}
+{#        <label class="control-label col-sm-2">确认人：</label>#}
+{#        <div class=" col-sm-6">#}
+{#         <input class="form-control" type="text" name="ConfirmName" placeholder="">#}
+{#        </div>#}
+{#      </div>#}
+      <div class="form-group">
+        <label class="control-label col-sm-2"></label>
+        <div class="col-sm-6">
+            <input type="submit">
+        </div>
+    </div>
+  </form>
+{% endblock %}

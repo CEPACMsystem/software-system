@@ -99,3 +99,46 @@ def user_logout(request):
     return HttpResponseRedirect('/user_login')
 
 def mydailyrepord(request):
+    if request.method == 'POST':
+        a = request.POST.get('daydate', None)
+        b = request.POST.get('temperatures', None)
+        c = request.POST.get('isolate', None)
+        d = request.POST.get('cough', None)
+        e = request.POST.get('others', None)
+        f = request.POST.get('rename', None)
+        g = models.UserProfil.objects.get(Name=f)
+        h = g.id
+        print(f,g.id)
+        dayre = {
+            'DataReport': a,
+            'Temperature': b,
+            'Isolated': c,
+            'Cough': d,
+            'Other': e,
+            'DayRepord_id': h,
+        }
+        models.DailyRepords.objects.create(**dayre)
+        return HttpResponseRedirect('/resident')
+    else:
+        time = datetime.datetime.now()
+        user = User.objects.get(id = request.user.id)
+        report = models.UserProfil.objects.get(user_id=user.id)
+        context = {
+            'ccc': 'active',
+            'time': time,
+            'report': report
+        }
+        return render(request, 'resident/everydayrepord.html',context)
+
+#个人信息
+def personalinfo(request):
+    user = User.objects.get(id=request.user.id)
+    employ = models.UserProfil.objects.get(user_id=user.id)
+    # dep = models.DailyRepords.objects.get(DayRepord=employ.id)
+    context = {
+        'aaa': 'active',
+        'user': user,
+        'employ': employ,
+        # 'dep': dep,
+    }
+    return render(request, 'resident/personalinfo.html', context)
