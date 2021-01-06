@@ -1,0 +1,50 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+  <form class="form-horizontal" action="" method="post">
+    <div class="form-group">
+        <label class="control-label col-sm-2">日期：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="datetime" name="outdate" value="{{ times |date:'Y-m-d' }}">
+        </div>
+    </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">姓名：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="myoutname" placeholder="" value="{{ gout.Name }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">身份证号：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="outid" placeholder="" value="{{ gout.IdCard }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">住址：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="adress">
+                <option value="{{ report.FloorNumber }}">{{ gout.UnitNumber }}单元{{ gout.FloorNumber }}楼{{ gout.HouseNumber }}房间</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">目的地：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="destination" placeholder="" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">原因：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="reasons" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2"></label>
+        <div class="col-sm-6">
+            <input type="submit">
+        </div>
+    </div>
+  </form>
+{% endblock %}

@@ -8,14 +8,14 @@ class UserProfil(models.Model):
     Name = models.CharField(verbose_name='姓名', max_length=11)
     IdCard = models.CharField(verbose_name='身份证号', max_length=20)
     Phone = models.CharField(verbose_name='手机号',max_length=11)
-    UnitNumber = models.IntegerField(verbose_name='单元号')
-    FloorNumber = models.IntegerField(verbose_name='楼号')
-    HouseNumber = models.IntegerField(verbose_name='房间号')
+    UnitNumber = models.CharField(verbose_name='单元号',null=True,max_length=11)
+    FloorNumber = models.CharField(verbose_name='楼号',null=True,max_length=11)
+    HouseNumber = models.CharField(verbose_name='房间号',null=True,max_length=11)
 
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.UserType
+        return self.Name
     #内部类
     class Meta:
         verbose_name = verbose_name_plural = '用户注册'#对表设置
@@ -29,7 +29,34 @@ class DailyRepords(models.Model):
     DayRepord = models.ForeignKey(UserProfil,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.DataReport
+        return self.Temperature
     #内部类
     class Meta:
         verbose_name = verbose_name_plural = '每日上报'#对表设置
+
+#出社区申请表
+class GetOut(models.Model):
+    DataApply = models.DateField(verbose_name='申请日期',max_length=11)
+    Destination = models.CharField(verbose_name='目的地',max_length=11)
+    OutReason = models.CharField(verbose_name='原因',max_length=11)
+    GOut= models.ForeignKey(UserProfil,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Destination
+    #内部类
+    class Meta:
+        verbose_name = verbose_name_plural = '出社区申请'#对表设置
+
+#进社区申请表
+class GetInto(models.Model):
+    DataInto = models.DateField(verbose_name='日期',max_length=11)
+    MainDes = models.CharField(verbose_name='停留地点',max_length=11)
+    Travel = models.CharField(verbose_name='重点地区',max_length=11)
+    Places = models.CharField(verbose_name='途径地', max_length=100)
+    Gin = models.ForeignKey(UserProfil,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.MainDes
+    #内部类
+    class Meta:
+        verbose_name = verbose_name_plural = '进社区申请'#对表设置
