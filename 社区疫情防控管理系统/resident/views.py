@@ -162,33 +162,33 @@ def personalinfo(request):
 
 
 #出社区申请
-# @login_required
-# def getout(request):
-#     if request.method == 'POST':
-#         a = request.POST.get('outdate', None)
-#         b = request.POST.get('destination', None)
-#         c = request.POST.get('reasons', None)
-#         d = request.POST.get('myoutname', None)
-#         e = models.UserProfil.objects.get(Name=d)
-#         f = e.id
-#         dayout = {
-#             'DataApply': a,
-#             'Destination': b,
-#             'OutReason': c,
-#             'GOut_id': f,
-#         }
-#         models.GetOut.objects.create(**dayout)
-#         return HttpResponseRedirect('/resident')
-#     else:
-#         times = datetime.datetime.now()
-#         user = User.objects.get(id = request.user.id)
-#         gout = models.UserProfil.objects.get(user_id=user.id)
-#         context = {
-#             'ddd': 'active',
-#             'times': times,
-#             'gout': gout
-#         }
-#         return render(request, 'resident/getout.html',context)
+@login_required
+def getout(request):
+    if request.method == 'POST':
+        a = request.POST.get('outdate', None)
+        b = request.POST.get('destination', None)
+        c = request.POST.get('reasons', None)
+        d = request.POST.get('myoutname', None)
+        e = models.UserProfil.objects.get(Name=d)
+        f = e.id
+        dayout = {
+            'DataApply': a,
+            'Destination': b,
+            'OutReason': c,
+            'GOut_id': f,
+        }
+        models.GetOut.objects.create(**dayout)
+        return HttpResponseRedirect('/resident')
+    else:
+        times = datetime.datetime.now()
+        user = User.objects.get(id = request.user.id)
+        gout = models.UserProfil.objects.get(user_id=user.id)
+        context = {
+            'ddd': 'active',
+            'times': times,
+            'gout': gout
+        }
+        return render(request, 'resident/getout.html',context)
 
 
 #进社区申请
