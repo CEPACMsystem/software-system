@@ -1,0 +1,38 @@
+{% extends 'department/de_base.html' %}
+
+{% block main %}
+  <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>请假日期</th>
+					<th>员工编号</th>
+					<th>请假类型</th>
+					<th>开始日期</th>
+                    <th>结束日期</th>
+                    <th>请假天数</th>
+                    <th>请假原因</th>
+                    <th>确认标志</th>
+                    <th>确认人</th>
+				</tr>
+                {% for c in applications %}
+                    {% for i in c %}
+                    <tr>
+                        <td>{{ i.Applidate}}</td>
+                        <td>{{ i.EmployeeNum }}</td>
+                        <td>{{ i.AppliType }}</td>
+                        <td>{{ i.BeginTime }}</td>
+                        <td>{{ i.EndTime }}</td>
+                        <td>{{ i.Days }}</td>
+                        <td>{{ i.Reason }}</td>
+                        <td>{{ i.ConfirmLogo }}</td>
+                        <td>{{ i.ConfirmName }}</td>
+                        <td>
+                            <a href="{% url 'agree' %}?eid={{ i.id }}" onclick="return confirm('同意');">同意</a>
+                            <a href="{% url 'noagree' %}?eid={{ i.id }}" onclick="return confirm('不同意');">不同意</a>
+                        </td>
+                    </tr>
+                        {% endfor %}
+                {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

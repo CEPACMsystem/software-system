@@ -1,0 +1,18 @@
+{% extends 'home/login_base.html' %}
+
+{% block main %}
+<form class="form-signin" action="" method="post">
+        <h2 class="form-signin-heading">员工请假管理系统</h2><br>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="昵称" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <input type="radio"  value="普通员工" name="posts"/>普通员工
+        <input type="radio"  value="部门负责人" name="posts"/>部门负责人
+        <div>
+            <span style="color: red">{{ errer }}</span>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <a href="{% url 'reg' %}" class="btn btn-lg btn-info btn-block" type="submit">注册</a>
+      </form>
+{% endblock %}

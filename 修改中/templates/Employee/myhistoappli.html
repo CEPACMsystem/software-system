@@ -1,0 +1,35 @@
+
+{% extends 'home/../../../../../社区/software-system/software-system/社区疫情防控管理系统/templates/home/base.html' %}
+
+{% block main %}
+  <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>请假日期</th>
+					<th>员工编号</th>
+					<th>请假类型</th>
+					<th>开始日期</th>
+                    <th>结束日期</th>
+                    <th>请假天数</th>
+                    <th>请假原因</th>
+                    <th>确认标志</th>
+                    <th>确认人</th>
+				</tr>
+                {% for i in emnum %}
+                    {% if i.ConfirmLogo == '同意' or i.ConfirmLogo == '未同意' %}
+                    <tr>
+                        <td>{{ i.Applidate}}</td>
+                        <td>{{ i.EmployeeNum }}</td>
+                        <td>{{ i.AppliType }}</td>
+                        <td>{{ i.BeginTime }}</td>
+                        <td>{{ i.EndTime }}</td>
+                        <td>{{ i.Days }}</td>
+                        <td>{{ i.Reason }}</td>
+                        <td>{{ i.ConfirmLogo }}</td>
+                        <td>{{ i.ConfirmName }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

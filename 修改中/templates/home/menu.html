@@ -1,0 +1,10 @@
+<div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="{{ aaa }}"><a href="{% url 'employee1' %}">首页<span class="sr-only">(current)</span></a></li>
+            <li class="{{ ccc }}"><a href="{% url 'application_add' %}">申请假期</a></li>
+            <li class="{{ sss }}"><a href="{% url 'search' %}">查询假期</a></li>
+            <li class="{{ zzz }}"><a href="{% url 'myhistoappli' %} ">历史信息</a></li>
+              <li><a href="{% url 'user_logout' %}" onclick="return confirm('确定退出吗？');">安全退出</a></li>
+          </ul>
+
+        </div>

@@ -1,0 +1,39 @@
+{% extends 'home/login_base.html' %}
+
+{% block main %}
+<form class="form-signin" action="" method="post">
+        <h2 class="form-signin-heading">注册</h2>
+        <label for="inputUsername" class="sr-only">用户名</label>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="用户名" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" name="password1" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <input type="password" name="password2" id="inputPassword" class="form-control" placeholder="确认密码" required="">
+        <label for="inputName" class="sr-only">昵称</label>
+        <input type="text" name="nick" id="inputName" class="form-control" placeholder="昵称" required="">
+        <label for="inputEmail" class="sr-only">邮箱</label>
+        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="邮箱" required="">
+        <label for="inputPhone" class="sr-only">手机号</label>
+        <input type="text" name="phone" id="inputPhone" class="form-control" placeholder="手机号" required="">
+        <label for="inputEmployee" class="sr-only">用户编号</label>
+        <input type="text" name="employee" id="inputEmployee" class="form-control" placeholder="用户编号" required="">
+        <label for="inputName" class="sr-only">部门</label>
+        <div class="col-sm-6">
+            <select class="form-control" name="department">
+              {% for depart in s %}
+                <option value="{{ depart.DepartMentName }}">{{ depart.DepartMentName }}</option>
+              {% endfor %}
+          </select>
+        </div>
+        <label for="inputEmployee" class="sr-only">用户类型</label>
+        <div class="col-sm-6">
+            <select class="form-control" name="type">
+                <option value="普通员工">普通员工</option>
+                <option value="部门负责人">部门负责人</option>
+          </select>
+        </div>
+        <div>
+            <span style="color: red">{{ errer }}</span>
+        </div>
+        <input class="btn btn-lg btn-info btn-block" type="submit">
+      </form>
+{% endblock %}

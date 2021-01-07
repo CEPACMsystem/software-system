@@ -1,0 +1,42 @@
+{% extends 'department/de_base.html' %}
+{% block main %}
+  <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>请假日期</th>
+					<th>员工编号</th>
+					<th>请假类型</th>
+					<th>员工姓名</th>
+                    <th>请假天数</th>
+                    <th>部门</th>
+                    <th>请假总天数</th>
+				</tr>
+
+                {% for x in c %}
+                        {% for i in x %}
+                        {% if i.EmployeeNum  == 2017000001 %}
+                        <tr>
+                            <td>{{ i.Applidate}}</td>
+                            <td>{{ i.EmployeeNum }}</td>
+                            <td>{{ i.AppliType }}</td>
+                            <td>{{ i.ConfirmName}}</td>
+                            <td>{{ i.Days }}</td>
+                            <td>{{ d.DepartmentNum }}</td>
+                            <td> {{ m.0 }}</td>
+                        </tr>
+                    {% elif i.EmployeeNum == 2017000002 %}
+                            <tr>
+                            <td>{{ i.Applidate}}</td>
+                            <td>{{ i.EmployeeNum }}</td>
+                            <td>{{ i.AppliType }}</td>
+                            <td>{{ i.ConfirmName}}</td>
+                            <td>{{ i.Days }}</td>
+                            <td>{{ d.DepartmentNum }}</td>
+                            <td> {{ m.1 }} </td>
+                        </tr>
+                            {% endif %}
+                        {% endfor %}
+            {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

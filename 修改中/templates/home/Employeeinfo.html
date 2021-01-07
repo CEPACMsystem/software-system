@@ -1,0 +1,27 @@
+{% extends 'department/de_base.html' %}
+
+{% block main %}
+  <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>员工编号</th>
+					<th>姓名</th>
+					<th>上级编号</th>
+					<th>部门</th>
+				</tr>
+                {% for i in employees %}
+
+				<tr>
+					<td>{{ i.EmployeeNum}}</td>
+					<td>{{ i.EmployeeName }}</td>
+					<td>{{ i.StaffNum }}</td>
+					<td>{{ i.DepartmentNum }}</td>
+                    <td>
+                        <a href="{% url 'employee_del' %}?eid={{ i.id }}" onclick="return confirm('确定删除吗？');">删除</a>
+                        <a href="{% url 'employee_change' %}?eid={{ i.id }}" onclick="return confirm('确定修改吗？');">修改</a>
+                    </td>
+				</tr>
+                {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

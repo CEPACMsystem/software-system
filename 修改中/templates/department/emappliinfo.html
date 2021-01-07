@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'department/de_base.html' %}
+
+{% block main %}
+<div class="row text-center vertical-middle-sm">
+    <h1>我的信息</h1>
+    <div class="row">
+        <div class="col-md-6" >
+            <div class="row">
+                <div class="col-md-4 text-right"><span>用户名:</span></div>
+                <div class="col-md-8 text-left">{{user.username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>姓名:</span></div>
+                <div class="col-md-8 text-left">{{dep.DepartMentSir}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>工作类型:</span></div>
+                <div class="col-md-8 text-left">{{employ.UserType}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>部门:</span></div>
+                <div class="col-md-8 text-left">{{dep.DepartMentName}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>编号:</span></div>
+                <div class="col-md-8 text-left">{{dep.DepartMentStaffNum}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>邮箱:</span></div>
+                <div class="col-md-8 text-left">{{user.email}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>电话:</span></div>
+                <div class="col-md-8 text-left">{{employ.Phone}}</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

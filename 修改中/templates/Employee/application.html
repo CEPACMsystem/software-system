@@ -1,0 +1,65 @@
+{% extends 'home/../../../../../社区/software-system/software-system/社区疫情防控管理系统/templates/home/base.html' %}
+
+{% block main %}
+  <form class="form-horizontal" action="" method="post">
+    <div class="form-group">
+        <label class="control-label col-sm-2">请假日期：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="datetime-local" name="Applidate" value="{{ time |date:'Y-m-d' }}">
+        </div>
+    </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">员工编号：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="EmployeeNum" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">请假类型：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="AppliType">
+                <option value="01-事假">事假</option>
+              <option value="02-病假">病假</option>
+              <option value="03-出差">出差</option>
+              <option value="04-带薪休假">带薪休假</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">开始日期：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="datetime" name="BeginTime" value="{{ time |date:'Y-m-d'}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">结束日期：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="datetime" name="EndTime" value="{{ time |date:'Y-m-d'}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">申请天数：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="number" name="Days" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">外出申请原因：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="Reason" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">确认人：</label>
+        <div class=" col-sm-6">
+         <input class="form-control" type="text" name="ConfirmName" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2"></label>
+        <div class="col-sm-6">
+            <input type="submit">
+        </div>
+    </div>
+  </form>
+{% endblock %}
