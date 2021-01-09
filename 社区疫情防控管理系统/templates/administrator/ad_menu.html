@@ -1,21 +1,58 @@
-<div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="{{ aaa }}"><a href="">首页<span class="sr-only">(current)</span></a></li>
-              <li><a href="">社区防疫</a></li>
-            <li><a href="">业主信息管理</a></li>
-            <li><a href="#"><span>服务管理</span>
-                <ul class="">
-                            <li>品牌设计</li>
-                            <li>网页设计</li>
-                            <li>平面设计</li>
-                            <li>电子商城</li>
-                            <li>空间/建筑</li>
-                        </ul>
-            </a></li>
-              <li><a href="">物资管理</a></li>
-            <li><a href="">信息公示</a></li>
-              <li><a href="">数据统计</a></li>
-            <li><a href="">安全退出</a></li>
-          </ul>
+{#<!DOCTYPE html>#}
+{#{% extends 'home/ad_base.html' %}#}
+{##}
+{#{% block main %}#}
 
-        </div>
+<div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar menu">
+          <li
+                  class="abc {{ aaa }}"><a href="">首页</a>
+
+          </li>
+        <li>
+            <h5>社区防疫</h5>
+            <ul class="ilist">
+                <li><a href="{% url 'getout' %}">每日提交</a>
+                <i class="triangle"></i>
+                </li>
+                <li><a href="{% url 'getinto' %}">居民申请</a>
+                <i class="triangle"></i>
+                </li>
+              </ul>
+        </li>
+        <li>
+            <h5>业主信息管理</h5>
+            <ul class="ilist">
+                <li><a href="{% url 'hello' %}">出</a>
+                <i class="triangle"></i>
+                </li>
+                <li><a href="{% url 'getinto' %}">进</a>
+                <i class="triangle"></i>
+                </li>
+              </ul>
+        </li>
+          <li>
+              <h5>服务管理</h5>
+              <ul class="ilist">
+                <li><a href="{% url 'getout' %}">出社区申请</a>
+                <i class="triangle"></i>
+                </li>
+                <li><a href="{% url 'getinto' %}">进社区申请</a>
+                <i class="triangle"></i>
+                </li>
+                <li><a href="#">车辆通行</a>
+                <i class="triangle"></i>
+                </li>
+                <li><a href="#">申诉</a>
+                <i class="triangle"></i>
+                </li>
+              </ul>
+          </li>
+        <li class="abc"><a href="">物资管理</a></li>
+        <li class="abc"><a href="#">信息公示</a></li>
+          <li class="abc"><a href="#">数据统计</a></li>
+        <li class="abc"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">安全退出</a></li>
+      </ul>
+
+</div>
+{#{% endblock %}#}

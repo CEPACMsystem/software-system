@@ -39,7 +39,7 @@ def user_login(request):
                         return HttpResponseRedirect('/resident')
                     elif c == types.UserType and types.UserType == '物业管理员':
                         auth.login(request,users)
-                        return HttpResponseRedirect('/resident')
+                        return HttpResponseRedirect('/administrator')
                 else:
                     return render(request, 'home/login.html', {'errer': '账号已被冻结'})
             else:
