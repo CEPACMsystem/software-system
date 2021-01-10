@@ -77,6 +77,7 @@ class Help(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = '互助申请'#对表设置
 
+#用品申请
 class DailyUse(models.Model):
     Datahelp = models.DateField(verbose_name='日期',max_length=11)
     UseType = models.CharField(verbose_name='用品名称',max_length=100)
@@ -86,7 +87,7 @@ class DailyUse(models.Model):
     Appliance = models.ForeignKey(UserProfil,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Auditor
+        return self.Datahelp
     #内部类
     class Meta:
         verbose_name = verbose_name_plural = '用品申请'#对表设置
