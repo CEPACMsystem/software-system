@@ -25,14 +25,27 @@
                 <li><a href="#">车辆通行</a>
                 <i class="triangle"></i>
                 </li>
-                <li><a href="#">申诉</a>
+                  <li><a href="{% url 'query' %}">申请查询</a>
                 <i class="triangle"></i>
                 </li>
-              </ul>
-          </li>
-        <li class="abc"><a href="">社区一家亲</a></li>
+                  <li><a href="#">申诉申请</a>
+                <i class="triangle"></i>
+                </li>
+              </ul></li>
+        <li><h5>社区一家亲</h5>
+              <ul class="ilist">
+                <li><a href="{% url 'help' %}">求助申请</a>
+                <i class="triangle"></i>
+                </li>
+                  <li><a href="{% url 'helplook' %}">求助查看</a>
+                <i class="triangle"></i>
+                </li>
+                <li><a href="">闲置物品</a>
+                <i class="triangle"></i>
+                </li>
+              </ul></li>
+          <li class="abc"><a href="{% url 'dailyuse' %}">生活用品</a></li>
         <li class="abc"><a href="{% url 'scode' %}">我的二维码</a></li>
-        <li class="abc"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">安全退出</a></li>
       </ul>
 
 </div>

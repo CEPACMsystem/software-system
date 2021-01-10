@@ -60,3 +60,33 @@ class GetInto(models.Model):
     #内部类
     class Meta:
         verbose_name = verbose_name_plural = '进社区申请'#对表设置
+
+#互助申请表
+class Help(models.Model):
+    Datahelp = models.DateField(verbose_name='日期',max_length=11)
+    HelpType = models.CharField(verbose_name='帮助类型',max_length=11)
+    Details = models.CharField(verbose_name='详细介绍',max_length=100)
+    ResPerson = models.CharField(verbose_name='负责人',max_length=11,null=True)
+    HelpSign = models.CharField(verbose_name='接受标志',max_length=11,null=True)
+    # Places = models.CharField(verbose_name='途径地', max_length=100)
+    Helps = models.ForeignKey(UserProfil,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.HelpType
+    #内部类
+    class Meta:
+        verbose_name = verbose_name_plural = '互助申请'#对表设置
+
+class DailyUse(models.Model):
+    Datahelp = models.DateField(verbose_name='日期',max_length=11)
+    UseType = models.CharField(verbose_name='用品名称',max_length=100)
+    UseSign = models.CharField(verbose_name='查看标志',max_length=11,null=True)
+    Auditor = models.CharField(verbose_name='审核人',max_length=11,null=True)
+    # Places = models.CharField(verbose_name='途径地', max_length=100)
+    Appliance = models.ForeignKey(UserProfil,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Auditor
+    #内部类
+    class Meta:
+        verbose_name = verbose_name_plural = '用品申请'#对表设置

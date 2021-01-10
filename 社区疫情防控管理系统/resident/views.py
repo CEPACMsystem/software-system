@@ -39,7 +39,7 @@ def user_login(request):
                         return HttpResponseRedirect('/resident')
                     elif c == types.UserType and types.UserType == '物业管理员':
                         auth.login(request,users)
-                        return HttpResponseRedirect('/resident')
+                        return HttpResponseRedirect('/administrator')
                 else:
                     return render(request, 'home/login.html', {'errer': '账号已被冻结'})
             else:
@@ -257,3 +257,119 @@ def scode(request):
     img.save(buf)
     image_stream = buf.getvalue()
     return HttpResponse(image_stream,content_type="image/png")
+
+#查询
+def query(request):
+    return render(request,'resident/query.html')
+
+
+#进社区申请查询
+@login_required
+def intocomquery(request):
+    user = User.objects.get(id=request.user.id)
+    ginto = models.UserProfil.objects.get(user_id=user.id)
+    emnum = models.GetInto.objects.filter(Gin_id=ginto.id).all()
+    print(ginto,emnum)
+    context = {
+        'sss': 'active',
+        'emnum': emnum,
+    }
+    return render(request, 'resident/intocomquery.html', context)
+
+
+#出社区申请
+@login_required
+def outcomquery(request):
+    user = User.objects.get(id=request.user.id)
+    ginto = models.UserProfil.objects.get(user_id=user.id)
+    emnum = models.GetOut.objects.filter(GOut_id=ginto.id).all()
+    print(ginto,emnum)
+    context = {
+        'sss': 'active',
+        'emnum': emnum,
+    }
+    return render(request, 'resident/outcomquery.html', context)
+
+#求助
+def help(request):
+    if request.method == 'POST':
+        a = request.POST.get('helpdate', None)
+        b = request.POST.get('helptype', None)
+        c = request.POST.get('helpname', None)
+        d = request.POST.get('helpdetails',None)
+        g = models.UserProfil.objects.get(Name=c)
+        h = g.id
+        dayre = {
+            'Datahelp': a,
+            'HelpType': b,
+            'Details':d,
+            'Helps_id': h,
+        }
+        models.Help.objects.create(**dayre)
+        return HttpResponseRedirect('/resident')
+    else:
+        time = datetime.datetime.now()
+        user = User.objects.get(id = request.user.id)
+        report = models.UserProfil.objects.get(user_id=user.id)
+        context = {
+            'ccc': 'active',
+            'time': time,
+            'report': report
+        }
+        return render(request, 'resident/help.html',context)
+
+#求助查看
+def helplook(request):
+    user = User.objects.get(id=request.user.id)
+    ghelp = models.UserProfil.objects.get(user_id=user.id)
+    emnum = models.Help.objects.filter(Helps_id=ghelp.id).all()
+    context = {
+        'sss': 'active',
+        'ghelp':ghelp,
+        'emnum': emnum,
+    }
+    return render(request, 'resident/helplook.html', context)
+
+#接受
+def agree(request):
+    a = '接受'
+    user = User.objects.get(id=request.user.id)
+    b = models.UserProfil.objects.get(user_id=user.id)
+    res = request.GET.get('eid', None)
+    models.Help.objects.filter(pk=res).update(HelpSign=a,ResPerson=b.Name)
+    return HttpResponseRedirect('/resident/helplook')
+
+#不接受
+# def noagree(request):
+#     a = '不接受'
+#     user = User.objects.get(id=request.user.id)
+#     b = models.UserProfil.objects.get(user_id=user.id)
+#     res = request.GET.get('eid', None)
+#     models.Help.objects.filter(pk=res).update(HelpSign=a,ResPerson=b.Name)
+#     return HttpResponseRedirect('/resident/helplook')
+
+#生活用品申请
+def dailyuse(request):
+    if request.method == 'POST':
+        a = request.POST.get('helpdate', None)
+        b = request.POST.get('usetype', None)
+        c = request.POST.get('helpname', None)
+        g = models.UserProfil.objects.get(Name=c)
+        h = g.id
+        dayre = {
+            'Datahelp': a,
+            'UseType': b,
+            'Appliance_id': h,
+        }
+        models.DailyUse.objects.create(**dayre)
+        return HttpResponseRedirect('/resident')
+    else:
+        time = datetime.datetime.now()
+        user = User.objects.get(id = request.user.id)
+        report = models.UserProfil.objects.get(user_id=user.id)
+        context = {
+            'ccc': 'active',
+            'time': time,
+            'report': report
+        }
+        return render(request, 'resident/dailyuse.html',context)
