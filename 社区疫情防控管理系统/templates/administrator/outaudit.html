@@ -1,0 +1,55 @@
+{% extends 'administrator/ad_base.html' %}
+
+{% block main %}
+    <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav menu">
+            <li class="abc acb"><a href="{% url 'outaudit' %}" style="color: #1acbfc">出社区审核</a></li>
+            <li class="abc"><a href="{% url 'intoaudit' %}" style="color: #1acbfc">进社区审核</a></li>
+{#            <li><a href="">车辆通行查询</a></li>#}
+{#              <li class="abc"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">注销</a></li>#}
+{#            <li><a href="">Help</a></li>#}
+          </ul>
+        </div>
+        <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>日期</th>
+					<th>姓名</th>
+					<th>手机号</th>
+					<th>住址</th>
+                    <th>目的地</th>
+                    <th>原因</th>
+                    <th>确认标志</th>
+                    <th>同意</th>
+                    <th>不同意</th>
+				</tr>
+                {% for i in out %}
+                    {% for j in a %}
+                        {% if j.pk == i.GOut_id %}
+                            <tr>
+                                <td>{{ i.DataApply}}</td>
+                                <td>{{ j.Name }}</td>
+                                <td>{{ j.Phone }}</td>
+                                <td>{{ j.UnitNumber }}单元{{ j.FloorNumber }}楼{{ j.HouseNumber }}房间</td>
+                                <td>{{ i.Destination }}</td>
+                                <td>{{ i.OutReason }}</td>
+                                {% if i.OutSign == None %}
+                                    <td></td>
+                                    <td>
+                                    <a href="{% url 'agree' %}?eid={{ i.id }}" style="color: #1acbfc" onclick="return confirm('同意');">同意</a>
+                                    </td>
+                                    <td>
+                                    <a href="{% url 'noagree' %}?eid={{ i.id }}" style="color: #1acbfc" onclick="return confirm('不同意');">不同意</a>
+                                    </td>
+{#                                {% else %}#}
+{#                                    <td>{{ i.ResPerson }}</td>#}
+{#                                    <td>{{ i.HelpSign }}</td>#}
+{#                                    <td>已有人接受</td>#}
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'administrator/ad_base.html' %}
+
+{% block main %}
+  <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>单元</th>
+					<th>楼</th>
+				</tr>
+                {% for i in isolation %}
+                    <tr>
+                        <td>{{ i.UnitNumber }}单元</td>
+                        <td>{{ i.FloorNumber }}楼</td>
+                    </tr>
+
+                {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

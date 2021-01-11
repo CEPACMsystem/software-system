@@ -36,6 +36,11 @@ a{
     background-color: #428bca;
 }
 
+.menu .acb a:visited{
+    cursor: pointer;
+    background-color: #428bca;
+}
+
 .menu>li{
 	margin-bottom: 5px;
 }

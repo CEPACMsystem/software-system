@@ -1,0 +1,24 @@
+{% extends 'administrator/ad_base.html' %}
+
+{% block main %}
+    <form class="form-horizontal" action="" method="post">
+      <div class="form-group">
+        <label class="control-label col-sm-2">物品名称：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="itemname" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">数量：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="number" step="0.1" name="acount" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2"></label>
+        <div class="col-sm-6">
+            <input type="submit">
+        </div>
+    </div>
+  </form>
+{% endblock %}

@@ -4,6 +4,7 @@
     <option name="excludedDirectories">
       <list>
         <option value="$PROJECT_DIR$" />
+        <option value="$PROJECT_DIR$" />
       </list>
     </option>
   </component>

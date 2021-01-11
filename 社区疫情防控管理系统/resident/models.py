@@ -11,9 +11,9 @@ class UserProfil(models.Model):
     UnitNumber = models.CharField(verbose_name='单元号',null=True,max_length=11)
     FloorNumber = models.CharField(verbose_name='楼号',null=True,max_length=11)
     HouseNumber = models.CharField(verbose_name='房间号',null=True,max_length=11)
-
+    Isolation = models.CharField(verbose_name='隔离标志',null=True,max_length=11)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-
+    Is = models.OneToOneField(models1.Isolation,on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.Name
     #内部类
@@ -39,6 +39,7 @@ class GetOut(models.Model):
     DataApply = models.DateField(verbose_name='申请日期',max_length=11)
     Destination = models.CharField(verbose_name='目的地',max_length=11)
     OutReason = models.CharField(verbose_name='原因',max_length=11)
+    OutSign = models.CharField(verbose_name='审核结果',max_length=11,null=True)
     GOut= models.ForeignKey(UserProfil,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -53,6 +54,7 @@ class GetInto(models.Model):
     MainDes = models.CharField(verbose_name='停留地点',max_length=11)
     Travel = models.CharField(verbose_name='重点地区',max_length=11)
     Places = models.CharField(verbose_name='途径地', max_length=100)
+    IntoSign = models.CharField(verbose_name='审核结果', max_length=11, null=True)
     Gin = models.ForeignKey(UserProfil,on_delete=models.CASCADE)
 
     def __str__(self):

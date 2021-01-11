@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 from resident import models
 import qrcode
 from six import BytesIO
@@ -70,30 +71,67 @@ def reg(request):
                         'password': make_password(password1),
                     }
                     user_info1 = User.objects.create(**user_info)
-                    if menunum == '' and floor == '' and house == '':
-                        user_profil2 = {
-                            'Name': Name,
-                            'Phone': phone,
-                            'IdCard': myidcard,
-                            'UnitNumber': 'null',
-                            'FloorNumber': 'null',
-                            'HouseNumber': 'null',
-                            'UserType': usertype,
-                            'user': user_info1,
-                        }
-                        models.UserProfil.objects.create(**user_profil2)
+                    try:
+                        n = models1.Isolation.objects.get(Name=Name)
+                    except ObjectDoesNotExist:
+                        n = None
+                    if n == None:
+                        s = 0
+                        print(s)
+                    if n:
+                        if menunum == '' and floor == '' and house == '':
+                            user_profil2 = {
+                                'Name': Name,
+                                'Phone': phone,
+                                'IdCard': myidcard,
+                                'UnitNumber': 'null',
+                                'FloorNumber': 'null',
+                                'HouseNumber': 'null',
+                                'UserType': usertype,
+                                'Isolation':n.IsolationSign,
+                                'Is_id': n.id,
+                                'user': user_info1,
+                            }
+                            models.UserProfil.objects.create(**user_profil2)
+                        else:
+                            user_profil = {
+                                'Name': Name,
+                                'Phone': phone,
+                                'IdCard': myidcard,
+                                'UnitNumber': menunum,
+                                'FloorNumber': floor,
+                                'HouseNumber': house,
+                                'UserType': usertype,
+                                'Isolation': n.IsolationSign,
+                                'Is_id':n.id,
+                                'user': user_info1,
+                            }
+                            models.UserProfil.objects.create(**user_profil)
                     else:
-                        user_profil = {
-                            'Name': Name,
-                            'Phone': phone,
-                            'IdCard': myidcard,
-                            'UnitNumber': menunum,
-                            'FloorNumber': floor,
-                            'HouseNumber': house,
-                            'UserType': usertype,
-                            'user': user_info1,
-                        }
-                        models.UserProfil.objects.create(**user_profil)
+                        if menunum == '' and floor == '' and house == '':
+                            user_profil2 = {
+                                'Name': Name,
+                                'Phone': phone,
+                                'IdCard': myidcard,
+                                'UnitNumber': 'null',
+                                'FloorNumber': 'null',
+                                'HouseNumber': 'null',
+                                'UserType': usertype,
+                                'user': user_info1,
+                            }
+                            models.UserProfil.objects.create(**user_profil2)
+                        else:
+                            user_profil = {
+                                'Name': Name,
+                                'Phone': phone,
+                                'IdCard': myidcard,
+                                'UnitNumber': menunum,
+                                'FloorNumber': floor,
+                                'HouseNumber': house,
+                                'UserType': usertype,
+                                'user': user_info1,
+                            }
+                            models.UserProfil.objects.create(**user_profil)
                     return HttpResponseRedirect('/user_login')
                 else:  # 用户已存在
                     return render(request, 'home/reg.html', {'errer': '用户名已存在'})
@@ -362,13 +400,13 @@ def dailyuse(request):
             'Appliance_id': h,
         }
         models.DailyUse.objects.create(**dayre)
-        return HttpResponseRedirect('/resident')
+        return HttpResponseRedirect('/resident/dailyuse')
     else:
         time = datetime.datetime.now()
         user = User.objects.get(id = request.user.id)
         report = models.UserProfil.objects.get(user_id=user.id)
         context = {
-            'ccc': 'active',
+            'ddd': 'active',
             'time': time,
             'report': report
         }

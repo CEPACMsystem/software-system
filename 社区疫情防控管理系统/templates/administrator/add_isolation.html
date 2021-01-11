@@ -1,0 +1,36 @@
+{% extends 'administrator/ad_base.html' %}
+
+{% block main %}
+  <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav menu">
+            <li class="abc acb {{ eee }}"><a href="{% url 'add_isolation' %}" style="color: #1acbfc">添加隔离人员</a></li>
+            <li class="abc"><a href="{% url 'look_isolation' %}" style="color: #1acbfc">查看隔离人员</a></li>
+{#            <li><a href="">车辆通行查询</a></li>#}
+{#              <li class="abc"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">注销</a></li>#}
+{#            <li><a href="">Help</a></li>#}
+          </ul>
+        </div>
+    <form class="form-horizontal" action="" method="post">
+      <div class="form-group">
+        <label class="control-label col-sm-2">姓名：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="name" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">隔离标志：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="isolationtype">
+                <option value="隔离">隔离</option>
+              <option value="非隔离">非隔离</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2"></label>
+        <div class="col-sm-6">
+            <input type="submit">
+        </div>
+    </div>
+  </form>
+{% endblock %}
