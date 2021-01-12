@@ -20,5 +20,5 @@ urlpatterns = [
     path('dailyuse/',views.dailyuse,name='dailyuse'),
     path('epiinfo/',views.epiinfo,name='epiinfo'),
     path('policyinfo/',views.policyinfo,name='policyinfo'),
-
+    path('dailyuselook/',views.dailyuselook,name='dailyuselook'),
 ]

@@ -17,6 +17,7 @@
 					<th>停留地点</th>
 					<th>重点地区</th>
 					<th>途径地</th>
+                    <th>审核结果</th>
 {#                    <th>结束日期</th>#}
 {#                    <th>请假天数</th>#}
 {#                    <th>请假原因</th>#}
@@ -30,11 +31,12 @@
                         <td>{{ i.MainDes }}</td>
                         <td>{{ i.Travel }}</td>
                         <td>{{ i.Places }}</td>
-{#                        <td>{{ i.EndTime }}</td>#}
-{#                        <td>{{ i.Days }}</td>#}
-{#                        <td>{{ i.Reason }}</td>#}
-{#                        <td>{{ i.ConfirmLogo }}</td>#}
-{#                        <td>{{ i.ConfirmName }}</td>#}
+                        {% if i.IntoSign == None %}
+                            <td>未审核</td>
+                        {% else %}
+                            <th>{{ i.IntoSign }}</th>
+                        {% endif %}
+
                     </tr>
 {#                    {% endif %}#}
                 {% endfor %}

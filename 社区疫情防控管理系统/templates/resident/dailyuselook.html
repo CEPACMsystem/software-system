@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+    <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>申请日期</th>
+					<th>申请物品</th>
+                    <th>审核结果</th>
+                    <th>审核人</th>
+				</tr>
+                {% for i in a %}
+                    <tr>
+                        <td>{{ i.Datahelp }}</td>
+                        <td>{{ i.UseType }}</td>
+                        {% if i.UseSign == None %}
+                            <td>未审核</td>
+                            <th></th>
+                        {% else %}
+                            <th>{{ i.UseSign }}</th>
+                            <td>{{ i.Auditor }}</td>
+                        {% endif %}
+
+                    </tr>
+{#                    {% endif %}#}
+                {% endfor %}
+			</tbody>
+		</table>
+    {% include 'home/page.html' %}
+{% endblock %}

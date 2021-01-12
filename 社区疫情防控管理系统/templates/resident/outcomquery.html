@@ -16,6 +16,7 @@
 					<th>申请日期</th>
 					<th>目的地</th>
 					<th>原因</th>
+                    <th>审核结果</th>
 {#					<th>途径地</th>#}
 {#                    <th>结束日期</th>#}
 {#                    <th>请假天数</th>#}
@@ -29,6 +30,11 @@
                         <td>{{ i.DataApply}}</td>
                         <td>{{ i.Destination }}</td>
                         <td>{{ i.OutReason }}</td>
+                        {% if i.OutSign == None %}
+                            <td>未审核</td>
+                        {% else %}
+                            <th>{{ i.OutSign }}</th>
+                        {% endif %}
 {#                        <td>{{ i.Places }}</td>#}
 {#                        <td>{{ i.EndTime }}</td>#}
 {#                        <td>{{ i.Days }}</td>#}

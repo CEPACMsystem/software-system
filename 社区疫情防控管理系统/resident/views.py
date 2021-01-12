@@ -526,3 +526,46 @@ def policyinfo(request):
     }
     return render(request,'resident/policyinfo.html',content)
 
+#结果查看
+def dailyuselook(request):
+    pn = request.GET.get('pn', None)
+    user = User.objects.get(id=request.user.id)
+    report = models.UserProfil.objects.get(user_id=user.id)
+    usea = models.DailyUse.objects.filter(Appliance_id=report.id).all()
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(usea,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
+    context = {
+        'ddd': 'active',
+        'report': report,
+        'usea':usea,
+        'a': a,
+        'num_pages': num_pages,
+        'numbers': numbers,
+        'pn': pn,
+    }
+    return render(request, 'resident/dailyuselook.html', context)

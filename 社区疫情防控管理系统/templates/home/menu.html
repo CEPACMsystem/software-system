@@ -44,7 +44,18 @@
 {#                <i class="triangle"></i>#}
 {#                </li>#}
               </ul></li>
-          <li class="abc"><a href="{% url 'dailyuse' %}">生活用品</a></li>
+          <li><h5>生活用品</h5>
+              <ul class="ilist">
+                <li><a href="{% url 'dailyuse' %}">用品申请</a>
+                <i class="triangle"></i>
+                </li>
+                  <li><a href="{% url 'dailyuselook' %}">结果查看</a>
+                <i class="triangle"></i>
+                </li>
+{#                <li><a href="">闲置物品</a>#}
+{#                <i class="triangle"></i>#}
+{#                </li>#}
+              </ul></li>
         <li class="abc"><a href="{% url 'scode' %}">我的二维码</a></li>
       </ul>
 
