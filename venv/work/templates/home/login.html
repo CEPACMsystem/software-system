@@ -1,0 +1,19 @@
+{% extends 'home/login_base.html' %}
+{% load static %}
+
+{% block main %}
+<form class="form-signin" action="" method="post">
+        <h2 class="form-signin-heading">社区疫情防控管理系统</h2><br>
+        <label for="inputEmail" class="sr-only">用户名</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="用户名" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <input type="radio"  value="小区居民" name="posts"/>小区居民
+        <input type="radio"  value="物业管理员" name="posts"/>物业管理员
+        <div>
+            <span style="color: red">{{ errer }}</span>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <a href="{% url 'reg' %}" class="btn btn-lg btn-info btn-block" type="submit">注册</a>
+      </form>
+{% endblock %}

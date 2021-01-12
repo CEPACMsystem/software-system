@@ -1,0 +1,30 @@
+{% extends 'administrator/ad_base.html' %}
+
+{% block main %}
+    <table class="table table-bordered table-hover">
+        <tbody class="table-striped">
+            <tr>
+                <th>用户类型</th>
+                <th>姓名</th>
+                <th>身份证号</th>
+                <th>手机号</th>
+                <th>单元</th>
+                <th>楼号</th>
+                <th>房号</th>
+                <th>是否隔离</th>
+            </tr>
+            {% for i in owner %}
+                <tr>
+                    <td>{{ i.UserType }}</td>
+                    <td>{{ i.Name }}</td>
+                    <td>{{ i.IdCard }}</td>
+                    <td>{{ i.Phone }}</td>
+                    <td>{{ i.UnitNumber }}</td>
+                    <td>{{ i.FloorNumber }}</td>
+                    <td>{{ i.HouseNumber }}</td>
+                    <td>{{ i.Isolation }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

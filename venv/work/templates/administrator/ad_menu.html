@@ -1,0 +1,67 @@
+
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar menu">
+    <li class="abc {{ aaa }}"><a href="{% url 'adinfo' %}">首页</a></li>
+    <li>
+        <h5>社区防疫</h5>
+          <ul class="ilist">
+            <li class="abc"><a href="{% url 'isolation' %}">隔离人员信息</a>
+            <i class="triangle"></i>
+            </li>
+            <li class="abc"><a href="{% url 'isolationarea' %}">隔离区域</a>
+            <i class="triangle"></i>
+            </li>
+            <li class="abc"><a href="{% url 'intoout' %}">出入审核</a>
+            <i class="triangle"></i>
+            </li>
+          </ul>
+    </li>
+    <li>
+        <h5>业主信息管理</h5>
+          <ul class="ilist">
+            <li><a href="{% url 'ownerinfo' %}">信息查看</a>
+            <li><a href="">出</a>
+            <i class="triangle"></i>
+            </li>
+            <li><a href="">进</a>
+            <i class="triangle"></i>
+            </li>
+          </ul>
+    </li>
+    <li>
+        <h5>服务管理</h5>
+          <ul class="ilist">
+            <li><a href=""></a>
+            <i class="triangle"></i>
+            </li>
+            <li><a href="">进社区申请</a>
+            <i class="triangle"></i>
+            </li>
+            <li><a href="#">车辆通行</a>
+            <i class="triangle"></i>
+            </li>
+            <li><a href="#">申诉</a>
+            <i class="triangle"></i>
+            </li>
+          </ul>
+    </li>
+    <li>
+        <h5>物资管理</h5>
+          <ul class="ilist">
+            <li><a href="{% url 'acquisition' %}">种类添加</a>
+            <i class="triangle"></i>
+            </li>
+            <li><a href="{% url 'appreview' %}">物资申请审核</a>
+            <i class="triangle"></i>
+            </li>
+            <li><a href="{% url 'inspection' %}">物资查看</a>
+            <i class="triangle"></i>
+          </ul>
+    </li>
+    <li class="abc"><a href="#">信息公示</a></li>
+    <li class="abc"><a href="#">数据统计</a></li>
+{#        <li class="abc"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">安全退出</a></li>#}
+  </ul>
+
+</div>
+

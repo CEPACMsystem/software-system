@@ -1,0 +1,42 @@
+{% extends 'administrator/ad_base.html' %}
+
+{% block main %}
+        <table class="table table-bordered table-hover">
+			<tbody class="table-striped">
+				<tr>
+					<th>日期</th>
+					<th>姓名</th>
+					<th>手机号</th>
+					<th>住址</th>
+                    <th>申请物品</th>
+                    <th>查看标志</th>
+                    <th>审核人</th>
+                    <th>查看</th>
+				</tr>
+                {% for i in emnum %}
+                    {% for j in users %}
+                        {% if j.pk == i.Appliance_id %}
+                            <tr>
+                                <td>{{ i.Datahelp}}</td>
+                                <td>{{ j.Name }}</td>
+                                <td>{{ j.Phone }}</td>
+                                <td>{{ j.UnitNumber }}单元{{ j.FloorNumber }}楼{{ j.HouseNumber }}房间</td>
+                                <td>{{ i.UseType }}</td>
+                                {% if i.UseSign == None %}
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                    <a href="{% url 'review' %}?eid={{ i.id }}" style="color: #1acbfc" onclick="return confirm('查看');">查看</a>
+                                    </td>
+                                {% else %}
+                                    <td>{{ i.UseSign }}</td>
+                                    <td>{{ i.Auditor }}</td>
+                                    <td>已查看</td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+			</tbody>
+		</table>
+{% endblock %}

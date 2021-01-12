@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'home/base.html' %}
+
+{% block main %}
+<div class="row text-center vertical-middle-sm">
+    <h1>我的信息</h1>
+    <div class="row">
+        <div class="col-md-6" >
+            <div class="row">
+                <div class="col-md-4 text-right"><span>用户名:</span></div>
+                <div class="col-md-8 text-left">{{user.username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>姓名:</span></div>
+                <div class="col-md-8 text-left">{{employ.Name}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>身份证号:</span></div>
+                <div class="col-md-8 text-left">{{employ.IdCard}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>住址:</span></div>
+                <div class="col-md-8 text-left">{{employ.UnitNumber}}单元{{ employ.FloorNumber }}号楼{{ employ.HouseNumber }}房间</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>电话:</span></div>
+                <div class="col-md-8 text-left">{{employ.Phone}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>用户类型:</span></div>
+                <div class="col-md-8 text-left">{{employ.UserType}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>注册日期:</span></div>
+                <div class="col-md-8 text-left">{{user.date_joined}}</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

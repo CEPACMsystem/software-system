@@ -1,0 +1,45 @@
+{% extends 'home/reg_base.html' %}
+
+{% block main %}
+<form class="form-signin" action="" method="post">
+        <h2 class="form-signin-heading">注册</h2>
+        <label for="inputUsername" class="sr-only">用户名</label>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="用户名" required="" autofocus="">
+        <label for="inputUsername" class="sr-only">姓名</label>
+        <input type="text" name="Name" id="inputUsername" class="form-control" placeholder="姓名" required="" autofocus="">
+        <label for="inputEmployee" class="sr-only">身份证号</label>
+        <input type="text" name="myidcard" id="inputEmployee" class="form-control" placeholder="身份证号" required="">
+        <label for="inputPhone" class="sr-only">手机号</label>
+        <input type="text" name="phone" id="inputPhone" class="form-control" placeholder="手机号" required="">
+        <label for="inputEmployee" class="sr-only">用户类型</label>
+{#        <input type="text" name="usertype" id="inputEmployee" class="form-control" placeholder="用户类型" required="">#}
+        <div class="form-control">
+            <input type="radio" name="usertype" value="小区居民" onchange="chy(this)">小区居民
+            <input type="radio" name="usertype" value="物业管理员" onchange="chn(this)">物业管理员
+            <input type="radio" name="usertype" value="访客" onchange="chn(this)">访客
+
+{#          <select class="form-control"  name="usertype">#}
+{#                <option value="">物业管理员</option>#}
+{#                <option type="radio" value="1" onchange="chy(this)">小区居民</option>#}
+{#                <option value="">访客</option>#}
+{#          </select>#}
+        </div>
+        <div id="patent1" style="display: none">
+            <label for="inputEmployee" class="sr-only">单元号</label>
+            <input type="text" name="menunum" id="inputEmployee" class="form-control" placeholder="单元号">
+            <label for="inputEmployee" class="sr-only">楼号</label>
+            <input type="text" name="floor" id="inputEmployee" class="form-control" placeholder="楼号">
+            <label for="inputEmployee" class="sr-only">房号</label>
+            <input type="text" name="house" id="inputEmployee" class="form-control" placeholder="房号">
+        </div>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" name="password1" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <input type="password" name="password2" id="inputPassword" class="form-control" placeholder="确认密码" required="">
+
+        <div>
+            <span style="color: red">{{ errer }}</span>
+        </div>
+        <input class="btn btn-lg btn-info btn-block" type="submit">
+        <a href="{% url 'user_login' %}" class="btn btn-lg btn-info btn-block">返回</a>
+      </form>
+{% endblock %}

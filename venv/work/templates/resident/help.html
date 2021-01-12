@@ -1,0 +1,65 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+  <form class="form-horizontal" action="" method="post">
+    <div class="form-group">
+        <label class="control-label col-sm-2">日期：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="datetime" name="helpdate" value="{{ time |date:'Y-m-d' }}">
+        </div>
+    </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">姓名：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="helpname" placeholder="" value="{{ report.Name }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">单元号：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="unitnum">
+                <option value="{{ report.UnitNumber }}">{{ report.UnitNumber }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">楼号：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="floornum">
+                <option value="{{ report.FloorNumber }}">{{ report.FloorNumber }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">房号：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="housenum">
+                <option value="{{ report.HouseNumber }}">{{ report.HouseNumber }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">帮助类型：</label>
+        <div class=" col-sm-6">
+          <select class="form-control" name="helptype">
+                <option value="照顾老人">照顾老人</option>
+              <option value="照顾孩子">照顾孩子</option>
+              <option value="照顾宠物">照顾宠物</option>
+              <option value="临时物品借用">临时物品借用</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">详细介绍：</label>
+        <div class=" col-sm-6">
+          <input class="form-control" type="text" name="helpdetails" placeholder="" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2"></label>
+        <div class="col-sm-6">
+            <input type="submit">
+        </div>
+    </div>
+  </form>
+{% endblock %}
