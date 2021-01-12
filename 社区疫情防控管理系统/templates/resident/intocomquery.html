@@ -3,9 +3,9 @@
 {% block main %}
   <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{% url 'intocomquery' %}">进社区申请查询</a></li>
-            <li><a href="{% url 'outcomquery' %}">出社区申请查询</a></li>
-            <li><a href="">车辆通行查询</a></li>
+            <li><a href="{% url 'intocomquery' %}" style="color: #1acbfc">进社区申请查询</a></li>
+            <li><a href="{% url 'outcomquery' %}" style="color: #1acbfc">出社区申请查询</a></li>
+{#            <li><a href="">车辆通行查询</a></li>#}
 {#              <li class="abc"><a href="{% url 'user_logout' %}"onclick="return confirm('确定退出吗？');">注销</a></li>#}
 {#            <li><a href="">Help</a></li>#}
           </ul>
@@ -23,7 +23,7 @@
 {#                    <th>确认标志</th>#}
 {#                    <th>确认人</th>#}
 				</tr>
-                {% for i in emnum %}
+                {% for i in a %}
 {#                    {% if i.ConfirmLogo == '同意' or i.ConfirmLogo == '未同意' %}#}
                     <tr>
                         <td>{{ i.DataInto}}</td>
@@ -40,4 +40,5 @@
                 {% endfor %}
 			</tbody>
 		</table>
+    {% include 'home/page.html' %}
 {% endblock %}

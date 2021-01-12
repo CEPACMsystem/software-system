@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %}
 
 {% block main %}
-  <form class="form-horizontal" action="" method="post">
+    <form class="form-horizontal" action="" method="post">
     <div class="form-group">
         <label class="control-label col-sm-2">日期：</label>
         <div class=" col-sm-6">
@@ -15,26 +15,16 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">单元号：</label>
+        <label class="control-label col-sm-2">手机号：</label>
         <div class=" col-sm-6">
-          <select class="form-control" name="unitnum">
-                <option value="{{ report.UnitNumber }}">{{ report.UnitNumber }}</option>
-          </select>
+          <input class="form-control" type="text" name="phone" placeholder="" value="{{ report.Phone }}">
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">楼号：</label>
+        <label class="control-label col-sm-2">住址：</label>
         <div class=" col-sm-6">
-          <select class="form-control" name="floornum">
-                <option value="{{ report.FloorNumber }}">{{ report.FloorNumber }}</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2">房号：</label>
-        <div class=" col-sm-6">
-          <select class="form-control" name="housenum">
-                <option value="{{ report.HouseNumber }}">{{ report.HouseNumber }}</option>
+          <select class="form-control" name="place">
+                <option value="{{ report.UnitNumber }}单元{{ report.FloorNumber }}楼{{ report.HouseNumber }}房间">{{ report.UnitNumber }}单元{{ report.FloorNumber }}楼{{ report.HouseNumber }}房间</option>
           </select>
         </div>
       </div>

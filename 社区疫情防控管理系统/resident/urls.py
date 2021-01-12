@@ -16,6 +16,9 @@ urlpatterns = [
     path('help/',views.help,name='help'),
     path('helplook/',views.helplook,name='helplook'),
     # path('help/noagree/',views.noagree,name='noagree'),
-    path('help/agree/',views.agree,name='agree'),
+    path('help/peopleagree/',views.peopleagree,name='peopleagree'),
     path('dailyuse/',views.dailyuse,name='dailyuse'),
+    path('epiinfo/',views.epiinfo,name='epiinfo'),
+    path('policyinfo/',views.policyinfo,name='policyinfo'),
+
 ]

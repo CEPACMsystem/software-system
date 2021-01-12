@@ -13,7 +13,7 @@
                 <th>房号</th>
                 <th>是否隔离</th>
             </tr>
-            {% for i in owner %}
+            {% for i in a %}
                 <tr>
                     <td>{{ i.UserType }}</td>
                     <td>{{ i.Name }}</td>
@@ -27,4 +27,5 @@
             {% endfor %}
         </tbody>
     </table>
+    {% include 'home/page.html' %}
 {% endblock %}

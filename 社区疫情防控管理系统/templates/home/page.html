@@ -1,0 +1,32 @@
+<nav aria-label="Page navigation" class="text-right">
+  <ul class="pagination">
+{#      上一页#}
+      {% if a.has_previous %}
+    <li>
+      <a href="?pn={{ a.previous_page_num }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+          {% else %}
+          <li class="disabled">
+              <a href="#" aria-label="Previous">
+                  <span aria-hidden="true"><<</span>
+              </a>
+          </li>
+      {% endif %}
+{% for num in numbers %}
+            {% if num == pn %}
+                <li class="active"><a href="?pn={{ num }}">{{ num }}</a></li>
+            {% else %}
+                <li><a href="?pn={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+  {% if a.has_next %}
+        <li>
+          <a href="?pn={{ a.next_page_number }}?keyword={{ request.GET.keyword }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+  {% endif %}
+  </ul>
+</nav>

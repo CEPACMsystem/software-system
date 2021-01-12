@@ -22,5 +22,9 @@ urlpatterns = [
     path('inspection/',views.inspection,name='inspection'),
     path('appreview/',views.appreview,name='appreview'),
     path('appreview/review',views.review,name='review'),
+    path('epidemic/',views.epidemic,name='epidemic'),
+    path('policy/',views.policy,name='policy'),
+    path('datasta/',views.datasta,name='datasta'),
+    # path('adinfo',views.adinfo,name='adinfo'),
     # path('adinfo',views.adinfo,name='adinfo'),
 ]

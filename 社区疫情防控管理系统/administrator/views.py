@@ -3,6 +3,7 @@ from resident import models
 import qrcode
 from six import BytesIO
 from administrator import models1
+from django.core.paginator import Paginator,InvalidPage,EmptyPage,PageNotAnInteger
 from resident import models
 from django.contrib.auth import logout, authenticate  # 登录，推出，验证
 from django.contrib import auth
@@ -52,10 +53,42 @@ def add_isolation(request):
 
 #查看隔离人员
 def look_isolation(request):
+    pn = request.GET.get('pn', None)
     a = models1.Isolation.objects.all()
     b = models.UserProfil.objects.filter(Isolation = '隔离').all()
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(b,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
     context = {
         'isolation':b,
+        'a': a,
+        'num_pages': num_pages,
+        'numbers': numbers,
+        'pn': pn,
     }
     return render(request,'administrator/look_isolation.html',context)
 
@@ -138,9 +171,41 @@ def noagree1(request):
 
 #业主信息查看
 def ownerinfo(request):
-    a = models.UserProfil.objects.filter(UserType='小区居民').all()
+    pn = request.GET.get('pn', None)
+    emnum = models.UserProfil.objects.filter(UserType='小区居民').all()
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(emnum,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
     content = {
-        'owner':a,
+        'owner':emnum,
+        'a': a,
+        'num_pages': num_pages,
+        'numbers': numbers,
+        'pn': pn,
     }
     return render(request,'administrator/ownerinfo.html',content)
 
@@ -163,9 +228,41 @@ def acquisition(request):
 
 #物资查看
 def inspection(request):
+    pn = request.GET.get('pn', None)
     s = models1.Material.objects.all()
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(s,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
     context = {
         'ma':s,
+        'ma': a,
+        'num_pages': num_pages,
+        'numbers': numbers,
+        'pn': pn,
     }
     return render(request,'administrator/inspection.html',context)
 
@@ -191,3 +288,55 @@ def review(request):
     res = request.GET.get('eid', None)
     models.DailyUse.objects.filter(pk=res).update(UseSign=a,Auditor=b.Name)
     return HttpResponseRedirect('/administrator/appreview')
+
+#疫情信息添加
+def epidemic(request):
+    if request.method == 'POST':
+        a = request.POST.get('infoname', None)
+        b = request.POST.get('infolink', None)
+        c = request.POST.get('infotime',None)
+        dayinto = {
+            'InfoName': a,
+            'InfoLink':b,
+            'InfoDate':c,
+        }
+        models1.EpidemicInfo.objects.create(**dayinto)
+        return HttpResponseRedirect('/administrator/epidemic')
+    else:
+        time = datetime.datetime.now()
+        context = {
+            'eee': 'active',
+            'time':time,
+        }
+        return render(request, 'administrator/epidemic.html',context)
+
+def policy(request):
+    if request.method == 'POST':
+        a = request.POST.get('policyname', None)
+        b = request.POST.get('policylink', None)
+        c = request.POST.get('policytime',None)
+        dayinto = {
+            'PolicyName': a,
+            'PolicyLink':b,
+            'PolicyDate':c,
+        }
+        models1.Policy.objects.create(**dayinto)
+        return HttpResponseRedirect('/administrator/policy')
+    else:
+        time = datetime.datetime.now()
+        context = {
+            'eee': 'active',
+            'time':time,
+        }
+        return render(request, 'administrator/policy.html',context)
+
+#数据统计
+def datasta(request):
+    emnum = models.DailyRepords.objects.all()
+    users = models.UserProfil.objects.all()
+    context = {
+        'sss': 'active',
+        'emnum': emnum,
+        'users': users,
+    }
+    return render(request, 'administrator/datasta.html', context)

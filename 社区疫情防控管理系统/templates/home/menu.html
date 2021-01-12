@@ -5,10 +5,10 @@
         <li>
             <h5>社区公告</h5>
             <ul class="ilist">
-                <li><a href="{% url 'getout' %}">出</a>
+                <li><a href="{% url 'epiinfo' %}">疫情信息</a>
                 <i class="triangle"></i>
                 </li>
-                <li><a href="{% url 'getinto' %}">进</a>
+                <li><a href="{% url 'policyinfo' %}">疫情政策</a>
                 <i class="triangle"></i>
                 </li>
               </ul>
@@ -22,15 +22,15 @@
                 <li><a href="{% url 'getinto' %}">进社区申请</a>
                 <i class="triangle"></i>
                 </li>
-                <li><a href="#">车辆通行</a>
-                <i class="triangle"></i>
-                </li>
+{#                <li><a href="#">车辆通行</a>#}
+{#                <i class="triangle"></i>#}
+{#                </li>#}
                   <li><a href="{% url 'query' %}">申请查询</a>
                 <i class="triangle"></i>
                 </li>
-                  <li><a href="#">申诉申请</a>
-                <i class="triangle"></i>
-                </li>
+{#                  <li><a href="#">申诉申请</a>#}
+{#                <i class="triangle"></i>#}
+{#                </li>#}
               </ul></li>
         <li><h5>社区一家亲</h5>
               <ul class="ilist">
@@ -40,11 +40,11 @@
                   <li><a href="{% url 'helplook' %}">求助查看</a>
                 <i class="triangle"></i>
                 </li>
-                <li><a href="">闲置物品</a>
-                <i class="triangle"></i>
-                </li>
+{#                <li><a href="">闲置物品</a>#}
+{#                <i class="triangle"></i>#}
+{#                </li>#}
               </ul></li>
-          <li class="abc {{ ddd }}"><a href="{% url 'dailyuse' %}">生活用品</a></li>
+          <li class="abc"><a href="{% url 'dailyuse' %}">生活用品</a></li>
         <li class="abc"><a href="{% url 'scode' %}">我的二维码</a></li>
       </ul>
 

@@ -14,19 +14,19 @@
                     <th>确认标志</th>
                     <th>选择</th>
 				</tr>
-                {% for i in emnum %}
+                {% for i in a %}
                     <tr>
                         <td>{{ i.Datahelp}}</td>
-                        <td>{{ ghelp.Name }}</td>
-                        <td>{{ ghelp.Phone }}</td>
-                        <td>{{ ghelp.UnitNumber }}单元{{ ghelp.FloorNumber }}楼{{ ghelp.HouseNumber }}房间</td>
+                        <td>{{ i.Appli }}</td>
+                        <td>{{ i.Phone }}</td>
+                        <td>{{ i.Place }}</td>
                         <td>{{ i.HelpType }}</td>
                         <td>{{ i.Details }}</td>
                         {% if i.HelpSign == None %}
                             <td></td>
                             <td></td>
                             <td>
-                            <a href="{% url 'agree' %}?eid={{ i.id }} " style="color: #1acbfc" onclick="return confirm('接受');">接受</a>
+                            <a href="{% url 'peopleagree' %}?eid={{ i.id }} " style="color: #1acbfc" onclick="return confirm('接受');">接受</a>
 {#                            <a href="{% url 'noagree' %}?eid={{ i.id }}" onclick="return confirm('不接受');">不接受</a>#}
                             </td>
                         {% else %}
@@ -39,4 +39,5 @@
                 {% endfor %}
 			</tbody>
 		</table>
+    {% include 'home/page.html' %}
 {% endblock %}

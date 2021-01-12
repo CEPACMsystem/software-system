@@ -4,6 +4,7 @@ from resident import models
 import qrcode
 from six import BytesIO
 from administrator import models1
+from django.core.paginator import Paginator,InvalidPage,EmptyPage,PageNotAnInteger
 from django.contrib.auth import logout, authenticate  # 登录，推出，验证
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -32,10 +33,7 @@ def user_login(request):
             users = authenticate(username=a, password=b)  #如果验证成功，返回用户实例
             if users is not None:
                 if users.is_active:
-                    print(users)
-                    print(c)
                     if c == types.UserType and types.UserType == '小区居民':
-                        print(c)
                         auth.login(request,users)
                         return HttpResponseRedirect('/resident')
                     elif c == types.UserType and types.UserType == '物业管理员':
@@ -216,7 +214,7 @@ def getout(request):
             'GOut_id': f,
         }
         models.GetOut.objects.create(**dayout)
-        return HttpResponseRedirect('/resident')
+        return HttpResponseRedirect('/resident/getout')
     else:
         times = datetime.datetime.now()
         user = User.objects.get(id = request.user.id)
@@ -248,7 +246,7 @@ def getinto(request):
             'Gin_id': g,
         }
         models.GetInto.objects.create(**dayinto)
-        return HttpResponseRedirect('/resident')
+        return HttpResponseRedirect('/resident/getinto')
     else:
         timess = datetime.datetime.now()
         user = User.objects.get(id = request.user.id)
@@ -304,13 +302,44 @@ def query(request):
 #进社区申请查询
 @login_required
 def intocomquery(request):
+    pn = request.GET.get('pn', None)
     user = User.objects.get(id=request.user.id)
     ginto = models.UserProfil.objects.get(user_id=user.id)
     emnum = models.GetInto.objects.filter(Gin_id=ginto.id).all()
-    print(ginto,emnum)
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(emnum,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
     context = {
         'sss': 'active',
         'emnum': emnum,
+        'a':a,
+        'num_pages':num_pages,
+        'numbers':numbers,
+        'pn':pn,
     }
     return render(request, 'resident/intocomquery.html', context)
 
@@ -318,13 +347,44 @@ def intocomquery(request):
 #出社区申请
 @login_required
 def outcomquery(request):
+    pn = request.GET.get('pn', None)
     user = User.objects.get(id=request.user.id)
     ginto = models.UserProfil.objects.get(user_id=user.id)
     emnum = models.GetOut.objects.filter(GOut_id=ginto.id).all()
-    print(ginto,emnum)
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(emnum,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
     context = {
         'sss': 'active',
         'emnum': emnum,
+        'a': a,
+        'num_pages': num_pages,
+        'numbers': numbers,
+        'pn': pn,
     }
     return render(request, 'resident/outcomquery.html', context)
 
@@ -335,16 +395,22 @@ def help(request):
         b = request.POST.get('helptype', None)
         c = request.POST.get('helpname', None)
         d = request.POST.get('helpdetails',None)
+        e = request.POST.get('phone',None)
+        f = request.POST.get('place',None)
         g = models.UserProfil.objects.get(Name=c)
+        print(f)
         h = g.id
         dayre = {
             'Datahelp': a,
             'HelpType': b,
-            'Details':d,
+            'Appli': c,
+            'Details': d,
+            'Phone': e,
             'Helps_id': h,
+            'Place': f,
         }
         models.Help.objects.create(**dayre)
-        return HttpResponseRedirect('/resident')
+        return HttpResponseRedirect('/resident/help')
     else:
         time = datetime.datetime.now()
         user = User.objects.get(id = request.user.id)
@@ -358,18 +424,50 @@ def help(request):
 
 #求助查看
 def helplook(request):
+    pn = request.GET.get('pn',None)
     user = User.objects.get(id=request.user.id)
     ghelp = models.UserProfil.objects.get(user_id=user.id)
-    emnum = models.Help.objects.filter(Helps_id=ghelp.id).all()
+    emnum = models.Help.objects.all()
+    try:
+        pn = int(pn)
+    except:
+        pn = 1
+    #分页
+    s = Paginator(emnum,2)#a1查询结果集,a2每页显示条数
+    try:
+        a = s.page(pn) #获取某一页记录
+    except (EmptyPage,InvalidPage,PageNotAnInteger) as e:
+        pn =1
+        a = s.page(pn)
+    num_pages = a.paginator.num_pages
+    if num_pages >= 5:  # 总页数大于你想要显示的分页数字
+        if pn <= 2:
+            start = 1
+            end = 6
+        elif pn > num_pages - 2:  # 10页  pn:9
+            start = num_pages - 4
+            end = num_pages + 1
+        else:
+            start = pn - 2
+            end = pn + 3
+    else:
+        start = 1
+        end = num_pages + 1
+
+    numbers = range(start, end)
     context = {
         'sss': 'active',
         'ghelp':ghelp,
         'emnum': emnum,
+        'a': a,
+        'num_pages':num_pages,
+        'numbers':numbers,
+        'pn':pn,
     }
     return render(request, 'resident/helplook.html', context)
 
 #接受
-def agree(request):
+def peopleagree(request):
     a = '接受'
     user = User.objects.get(id=request.user.id)
     b = models.UserProfil.objects.get(user_id=user.id)
@@ -411,3 +509,20 @@ def dailyuse(request):
             'report': report
         }
         return render(request, 'resident/dailyuse.html',context)
+
+#疫情信息
+def epiinfo(request):
+    info = models1.EpidemicInfo.objects.all()
+    content = {
+        'info':info,
+    }
+    return render(request,'resident/epiinfo.html',content)
+
+#疫情政策
+def policyinfo(request):
+    info = models1.Policy.objects.all()
+    content = {
+        'info':info,
+    }
+    return render(request,'resident/policyinfo.html',content)
+

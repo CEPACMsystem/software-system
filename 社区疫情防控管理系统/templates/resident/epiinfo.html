@@ -1,0 +1,11 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+  <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+          {% for i in info %}
+            <li><a href="{{ i.InfoLink }}" style="color: #1acbfc">{{ i.InfoName }}---{{ i.InfoDate }}</a></li>
+          {% endfor %}
+      </ul>
+    </div>
+{% endblock %}
